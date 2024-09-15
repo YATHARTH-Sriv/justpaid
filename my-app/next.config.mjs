@@ -5,7 +5,10 @@ const nextConfig = {
     images:{
         remotePatterns:[
             {hostname: "cdn.prod.website-files.com"}
-        ]
+        ],
+        domains: [
+            "api.microlink.io", // Microlink Image Preview
+          ],
     }
 };
 
