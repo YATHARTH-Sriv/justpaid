@@ -19,6 +19,7 @@ import axios from 'axios'
 import { LinkPreview } from "@/components/ui/link-preview";
 import dbconnect from '@/lib/db/connect'
 
+
 const revenueData = [
   { month: "Jan", revenue: 5000 },
   { month: "Feb", revenue: 7500 },
@@ -46,10 +47,9 @@ const invoices = [
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
+dbconnect()
 
-
-async function Page() {
-  await dbconnect(); // Capitalized the 'P' in Page
+function Page() { // Capitalized the 'P' in Page
   const [pagenumber, setpagenumber] = useState(1)
   const [formData, setFormData] = useState({
     username: '',
