@@ -8,7 +8,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.FRESHBOOKS_CLIENT_SECRET,
       authorization: {
         url: 'https://auth.freshbooks.com/oauth/authorize',
-        params: { scope: 'user:profile accounting:read accounting:write' },
+        params: { scope: 'user:profile:read' },
       },
       token: 'https://auth.freshbooks.com/oauth/token',
       userinfo: 'https://api.freshbooks.com/auth/api/v1/users/me',
