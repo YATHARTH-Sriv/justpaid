@@ -45,13 +45,13 @@ import { useSession } from 'next-auth/react'
 // ]
 
 // const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
-const { data: session } = useSession();
-const user = session?.user
-console.log(user)
+
 
 
 function page() { // Changed to capital 'P'
-  
+  const { data: session } = useSession();
+  const user = session?.user
+  console.log(user)
   return (
     // <div className="p-8 bg-gray-100 min-h-screen">
     //   <h1 className="text-4xl font-bold mb-8">Finance Dashboard</h1>
