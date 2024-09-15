@@ -1,9 +1,8 @@
-import dbconnect from "@/lib/db/connect";
+
 import UserModel from "@/lib/db/model/user.data.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-    await dbconnect();
     try{
     const { name, email } = await req.json();
     if (!name || !email) {

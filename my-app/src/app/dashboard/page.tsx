@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 import axios from 'axios'
 import { LinkPreview } from "@/components/ui/link-preview";
+import dbconnect from '@/lib/db/connect'
 
 const revenueData = [
   { month: "Jan", revenue: 5000 },
@@ -47,7 +48,8 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
 
 
-function Page() { // Capitalized the 'P' in Page
+async function Page() {
+  await dbconnect(); // Capitalized the 'P' in Page
   const [pagenumber, setpagenumber] = useState(1)
   const [formData, setFormData] = useState({
     username: '',
