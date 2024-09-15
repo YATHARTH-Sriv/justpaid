@@ -76,7 +76,7 @@ function Page() { // Capitalized the 'P' in Page
 
   const createExpense = async () => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/create-expense`, {
+      const response = await axios.post(`/api/create-expense`, {
         ...sampleData,
         access_token: accessToken,
       });
