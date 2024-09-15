@@ -3,8 +3,8 @@ import UserModel from "@/lib/db/model/user.data.model";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  try {
     await dbconnect();
+    try{
     const { name, email } = await req.json();
     if (!name || !email) {
       return NextResponse.json({ error: "Name and email are required" }, { status: 400 });
