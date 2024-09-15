@@ -32,7 +32,7 @@ function Hero() {
           From Weeks to<p className="text-purple-700">One Day</p>
         </h1>
         <p className="text-lg md:text-xl mt-2 text-gray-600 dark:text-gray-300">
-          Effortlessly streamline your invoicing and payment collections with JustPaid's
+          Effortlessly streamline your invoicing and payment collections with JustPaids
         </p>
         <p className="text-md mt-3 text-gray-600 dark:text-gray-300">
           AI-powered solutions.
