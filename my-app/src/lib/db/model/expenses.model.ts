@@ -1,24 +1,28 @@
-import mongoose ,{Schema,Document} from "mongoose";
+import mongoose, { Schema, Document } from "mongoose";
 
 export interface Expense extends Document {
-    startingdate: Date
-    amount: number,
-    title: string,
-    description: string ,
-    useremail:string
-  }
+  startingdate: Date;
+  amount: number;
+  title: string;
+  description: string;
+  useremail: string;
+}
 
-const ExpenseSchema: Schema<Expense>=new Schema({
+// Define the schema
+const ExpenseSchema: Schema<Expense> = new Schema(
+  {
     startingdate: { type: Date, required: true },
     amount: { type: Number, required: true },
     title: { type: String, required: true },
     description: { type: String },
-    useremail:{type:String,required:true}
-  },{timestamps:true})
+    useremail: { type: String, required: true },
+  },
+  { timestamps: true }
+);
 
-
+// Check if the model already exists, and if not, define it
 const ExpenseModel =
-  (mongoose.models.Expense as mongoose.Model<Expense>) ||
-  mongoose.model<Expense>('Cashflow', ExpenseSchema);
+  (mongoose.models.Expenses as mongoose.Model<Expense>) ||
+  mongoose.model<Expense>("Expenses", ExpenseSchema);
 
 export default ExpenseModel;

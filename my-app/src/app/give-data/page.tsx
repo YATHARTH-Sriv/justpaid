@@ -38,6 +38,13 @@ function page() {
     description: ''
   })
 
+  const [expenses, setExpenses] = useState({
+    description:"",
+    amount:"",
+    servicename:"",
+    start:"",
+  })
+
   const handleRevenueSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Revenue submitted:', revenue)
@@ -54,7 +61,7 @@ function page() {
         console.log(res.data)
         toast({
             title: "Revenue Data Recorded",
-            description: "Add More Details If You Want",
+            description: "Add More Records If You Want",
           })
     }
     // Here you would typically send the data to your backend
@@ -73,7 +80,7 @@ function page() {
         console.log(res.data)
         toast({
             title: "Invoice Data Recorded",
-            description: "Add More Details If You Want",
+            description: "Add More Records If You Want",
           })
     }
     // Here you would typically send the data to your backend
@@ -94,9 +101,28 @@ function page() {
             console.log(res.data)
             toast({
                 title: "Cash Flow Data Recorded",
-                description: "Add More Details If You Want",
+                description: "Add More Records If You Want",
             })
         }
+  }
+
+  const handleExpenseSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('Expense submitted:', expenses)
+    const res=await axios.post("/api/expense-data",{
+        description:expenses.description,
+        amount:expenses.amount,
+        servicename:expenses.servicename,
+        start:expenses.start,
+    })
+    if(res.status===201){
+        console.log(res.data)
+        toast({
+            title: "Expense Data Recorded",
+            description: "Add More Records If You Want",
+          })
+    }
+    // Here you would typically send the data to your backend
   }
 
   return (
@@ -115,7 +141,7 @@ function page() {
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger value="revenue">Revenue</TabsTrigger>
                     <TabsTrigger value="invoice">Invoice</TabsTrigger>
-                    <TabsTrigger value="cashflow">Cash Flow</TabsTrigger>
+                    <TabsTrigger value="expenses">Expenses</TabsTrigger>
                 </TabsList>
                 <TabsContent value="revenue">
                     <form onSubmit={handleRevenueSubmit} className="space-y-4">
@@ -232,7 +258,7 @@ function page() {
                     <Button type="submit">Submit Invoice</Button>
                     </form>
                 </TabsContent>
-                <TabsContent value="cashflow">
+                {/* <TabsContent value="cashflow">
                     <form onSubmit={handleCashFlowSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
@@ -290,12 +316,60 @@ function page() {
                     </div>
                     <Button type="submit">Submit Cash Flow</Button>
                     </form>
+                </TabsContent> */}
+                <TabsContent value="expenses">
+                    <form onSubmit={handleExpenseSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                        <Label htmlFor="expenses-amount">Amount</Label>
+                        <Input
+                            id="expenses-amount"
+                            type="number"
+                            placeholder="Enter amount"
+                            value={expenses.amount}
+                            onChange={(e) => setExpenses({...expenses, amount: e.target.value})}
+                            required
+                        />
+                        </div>
+                        <div className="space-y-2">
+                        <Label htmlFor="expenses-start">Starting Date</Label>
+                        <Input
+                            id="expenses-start"
+                            type="date"
+                            value={expenses.start}
+                            onChange={(e) => setExpenses({...expenses, start: e.target.value})}
+                            required
+                        />
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="expenses-description">Description</Label>
+                        <Input
+                        id="expenses-description"
+                        placeholder="Enter Description"
+                        value={expenses.description}
+                        onChange={(e) => setExpenses({...expenses, description: e.target.value})}
+                        required
+                        />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="expenses-service">Service-Name</Label>
+                        <Input
+                        id="expenses-service"
+                        placeholder="Enter Service Name"
+                        value={expenses.servicename}
+                        onChange={(e) => setExpenses({...expenses, servicename: e.target.value})}
+                        required
+                        />
+                    </div>
+                    <Button type="submit" >Submit Expense</Button>
+                    </form>
                 </TabsContent>
                 </Tabs>
             </CardContent>
             </Card>
             <div>
-                <Link href={"/user-dashboard"}>
+                <Link href={`/user-dashboard/kalki`}>
                  <Button className='bg-white text-black hover:bg-white p-2 m-3'>Go To Dashboard</Button>
                 </Link>
             </div>

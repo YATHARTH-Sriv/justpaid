@@ -33,7 +33,7 @@ function Navbar() {
       </ul>
     </div>
     <div className="navbar-end gap-3">
-      <Link href={"/sign-in"} className=" text-black mr-7">Login</Link>
+      <Link href={"/login"} className=" text-black mr-7">Login</Link>
       <Link href={"/sign-in"} className=" flex hover:bg-black text-md btn  bg-black text-white ">Schedule Demo<FaArrowRightLong className=" m-1 hover:bg-black hover:text-white" /></Link>
     </div>
   </div>

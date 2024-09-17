@@ -1,5 +1,5 @@
 import dbconnect from "@/lib/db/connect";
-import RevenueModel from "@/lib/db/model/revenue.model";
+import UserModel from "@/lib/db/model/user.data.model";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -9,9 +9,11 @@ export async function POST(req:NextRequest){
     const cookieStore = cookies();
     const userCookie = cookieStore.get('email');
     const cookievalue=userCookie?.value.replaceAll('%40','@')
-    const revenuedata=await RevenueModel.find({useremail:cookievalue})
-   //  console.log("revenue data",revenuedata)
-    return NextResponse.json(revenuedata,{status:200})
+    console.log("cookie value",cookievalue)
+    const userdata=await UserModel.find({email:cookievalue})
+    console.log("user data",userdata)
+   //  console.log("expense data",expensedata)
+    return NextResponse.json(userdata,{status:200})
     // await RevenueModel.find({useremail:userCookie})
    } catch (error) {
     return NextResponse.json({status:500})
