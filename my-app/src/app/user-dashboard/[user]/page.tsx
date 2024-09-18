@@ -23,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Bar, BarChart, Pie, PieChart, XAxis,CartesianGrid, Sector } from 'recharts'
 import { useEffect, useState } from 'react'
-import { useParams } from "next/navigation"
 import axios from "axios"
 import { TrendingUp } from "lucide-react"
 import {
@@ -363,7 +362,7 @@ function Page() {
                       </TableHeader>
                       <TableBody>
                         {expensedata && expensedata.map((data)=>
-                          <TableRow>
+                          <TableRow key={data._id}>
                           <TableCell>
                             <div className="font-medium">{data.title}</div>
                             <div className="hidden text-sm text-muted-foreground md:inline">
