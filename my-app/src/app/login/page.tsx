@@ -32,7 +32,7 @@ function Page() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const res=await axios.post('https://justpaid-roan.vercel.app/api/user-data', {
+    const res=await axios.post('/api/user-data', {
       name: formData.username,
       email: formData.email
     })
