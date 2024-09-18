@@ -42,13 +42,12 @@ import {
 import { PieSectorDataItem } from 'recharts/types/polar/Pie'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Skeleton } from "@/components/ui/skeleton"
 import Component from '@/components/profile/page'
 import SalesComponent from '@/components/sales/page'
 import AiComponent from '@/components/ai/page'
 
-export const description = "A donut chart with text"
 
  const chartConfig = {
   visitors: {
