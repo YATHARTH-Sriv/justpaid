@@ -122,10 +122,10 @@ function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.post("/api/get-revenue-data");
+        const res = await axios.post("https://justpaid-roan.vercel.app/api/get-revenue-data");
         setrevenuedata(res.data);
 
-        const response = await axios.post("/api/get-expense-data");
+        const response = await axios.post("https://justpaid-roan.vercel.app/api/get-expense-data");
         setexpensedata(response.data);
 
         // Initialize local totals for each category
