@@ -60,6 +60,7 @@ function page() {
     if(res.status===201){
         console.log(res.data)
         toast({
+            className:"text-white ",
             title: "Revenue Data Recorded",
             description: "Add More Records If You Want",
           })
@@ -79,6 +80,7 @@ function page() {
     if(res.status===201){
         console.log(res.data)
         toast({
+            className:"text-white ",
             title: "Invoice Data Recorded",
             description: "Add More Records If You Want",
           })
@@ -118,6 +120,7 @@ function page() {
     if(res.status===201){
         console.log(res.data)
         toast({
+            className:"text-white ",
             title: "Expense Data Recorded",
             description: "Add More Records If You Want",
           })

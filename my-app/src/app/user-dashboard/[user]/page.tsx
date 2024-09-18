@@ -229,7 +229,7 @@ function Page() {
                     </p>
                     <Link href={"/give-data"}>
                     <Button>
-                      Add Revenue
+                      Add Expenses
                     </Button>
                     </Link>
                     </div>
@@ -287,16 +287,16 @@ function Page() {
               </CardContent>
               <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 font-medium leading-none">
-                  Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                  Revenue Distribution Of Your Buisness <TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
-                  Showing total visitors for the last 6 months
+                  Total Revenue Of Last 6 months
                 </div>
               </CardFooter>
                 </Card> 
                 <Card className="flex flex-col">
               <CardHeader className="items-center pb-0">
-                <CardTitle>Pie Chart - Donut Active</CardTitle>
+                <CardTitle>Pie Chart</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 pb-0">
@@ -328,10 +328,10 @@ function Page() {
               </CardContent>
               <CardFooter className="flex-col gap-2 text-sm">
                 <div className="flex items-center gap-2 font-medium leading-none">
-                  Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+                  Revenue From Different Streams <TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
-                  Showing total visitors for the last 6 months
+                  Showing Total Revenue From Different Categories
                 </div>
               </CardFooter>
               </Card>
@@ -406,7 +406,6 @@ function Page() {
                   <CardContent className="grid gap-8">
                     <div className="flex items-center gap-4">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/01.png" alt="Avatar" />
                         <AvatarFallback>OM</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
@@ -421,7 +420,6 @@ function Page() {
                     </div>
                     <div className="flex items-center gap-4">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/02.png" alt="Avatar" />
                         <AvatarFallback>JL</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
@@ -436,7 +434,6 @@ function Page() {
                     </div>
                     <div className="flex items-center gap-4">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/03.png" alt="Avatar" />
                         <AvatarFallback>IN</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
@@ -451,7 +448,6 @@ function Page() {
                     </div>
                     <div className="flex items-center gap-4">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/04.png" alt="Avatar" />
                         <AvatarFallback>WK</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
@@ -466,7 +462,6 @@ function Page() {
                     </div>
                     <div className="flex items-center gap-4">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src="/avatars/05.png" alt="Avatar" />
                         <AvatarFallback>SD</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">

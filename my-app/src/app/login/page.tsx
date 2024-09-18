@@ -46,51 +46,52 @@ function page() {
     // Here you could also send the data to an API or perform other actions
   }
   return (
-    <div>
-         <div className="absolute inset-0 z-0 overflow-hidden">
-         <GridPattern />
-         </div>
-         <div className="relative text-white z-10 flex items-center justify-center">
-         <form onSubmit={handleSubmit}>
-         <Card className="w-full max-w-sm">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
-            <CardDescription>
-              Enter your email and password to login to your account.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="m@example.com"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="username"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button type="submit" className="w-full">Sign in</Button>
-          </CardFooter>
-        </Card>
-      </form>
-         </div>
-    </div>
+    <div className="min-h-screen flex items-center justify-center bg-black">
+  <div className="absolute inset-0 z-0 overflow-hidden">
+    <GridPattern />
+  </div>
+  <div className="relative text-white z-10 flex items-center justify-center">
+    <form onSubmit={handleSubmit}>
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email and password to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="m@example.com"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button type="submit" className="w-full">Sign in</Button>
+        </CardFooter>
+      </Card>
+    </form>
+  </div>
+</div>
+
   )
 }
 
