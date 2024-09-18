@@ -48,7 +48,7 @@ function Page() {
   const handleRevenueSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Revenue submitted:', revenue)
-    const res=await axios.post("https://justpaid-roan.vercel.app/api/revenue-data",{
+    const res=await axios.post("/api/revenue-data",{
         amount: revenue.amount,
         date: revenue.date,
         source: revenue.source,
