@@ -1,9 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar,AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { CalendarIcon, CameraIcon, EnvelopeClosedIcon, GearIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons"
+import { CalendarIcon, CameraIcon, EnvelopeClosedIcon, GearIcon, PersonIcon} from "@radix-ui/react-icons"
 
 export default function Component({ username, email }:{username: string, email?: string}) {
   return (

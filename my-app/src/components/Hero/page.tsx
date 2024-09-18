@@ -18,11 +18,7 @@ function Hero() {
   return (
     <section className="flex flex-col items-center mt-4 justify-center px-6 py-16 bg-white dark:bg-gray-900 gap-6">
       {/* Heading Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true, amount: 0.8 }}
+      <div
         className="text-center max-w-4xl"
       >
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
@@ -37,7 +33,7 @@ function Hero() {
         <p className="text-md mt-3 text-gray-600 dark:text-gray-300">
           AI-powered solutions.
         </p>
-      </motion.div>
+      </div>
 
       {/* Call-to-Action Buttons */}
       <motion.div
@@ -58,11 +54,7 @@ function Hero() {
       </motion.div>
 
       {/* Centered Image */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        viewport={{ once: true, amount: 0.8 }}
+      <div
         className="w-full mt-16 flex justify-center"
       >
         <Image
@@ -72,7 +64,7 @@ function Hero() {
           width={900}
           alt="centered image"
         />
-      </motion.div>
+      </div>
       
       {/* Informational Section */}
       <div className="m-3 p-4 gap-10">

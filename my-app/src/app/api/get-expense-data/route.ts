@@ -1,9 +1,9 @@
 import dbconnect from "@/lib/db/connect";
 import ExpenseModel from "@/lib/db/model/expenses.model";
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req:NextRequest){
+export async function POST(){
    await dbconnect()
    try {
     const cookieStore = cookies();

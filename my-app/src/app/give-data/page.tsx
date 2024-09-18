@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from '@/hooks/use-toast'
 import Link from 'next/link'
 
-function page() {
+function Page() {
   const {toast}= useToast()
   const [revenue, setRevenue] = useState({
     amount: '',
@@ -30,13 +30,13 @@ function page() {
     status: ''
   })
 
-  const [cashFlow, setCashFlow] = useState({
-    date: '',
-    amount: '',
-    type: '',
-    category: '',
-    description: ''
-  })
+//   const [cashFlow, setCashFlow] = useState({
+//     date: '',
+//     amount: '',
+//     type: '',
+//     category: '',
+//     description: ''
+//   })
 
   const [expenses, setExpenses] = useState({
     description:"",
@@ -88,25 +88,25 @@ function page() {
     // Here you would typically send the data to your backend
   }
 
-  const handleCashFlowSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Cash Flow submitted:', cashFlow)
-    // Here you would typically send the data to your backend
-    const res=await axios.post("/api/cash-flow",{
-        date: cashFlow.date,
-        amount: cashFlow.amount,
-        type: cashFlow.type,
-        category: cashFlow.category, 
-        description: cashFlow.description, 
-        })
-        if(res.status===201){
-            console.log(res.data)
-            toast({
-                title: "Cash Flow Data Recorded",
-                description: "Add More Records If You Want",
-            })
-        }
-  }
+//   const handleCashFlowSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault()
+//     console.log('Cash Flow submitted:', cashFlow)
+//     // Here you would typically send the data to your backend
+//     const res=await axios.post("/api/cash-flow",{
+//         date: cashFlow.date,
+//         amount: cashFlow.amount,
+//         type: cashFlow.type,
+//         category: cashFlow.category, 
+//         description: cashFlow.description, 
+//         })
+//         if(res.status===201){
+//             console.log(res.data)
+//             toast({
+//                 title: "Cash Flow Data Recorded",
+//                 description: "Add More Records If You Want",
+//             })
+//         }
+//   }
 
   const handleExpenseSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -382,4 +382,4 @@ function page() {
 }
     
 
-export default page
+export default Page

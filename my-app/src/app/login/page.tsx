@@ -8,7 +8,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-function page() {
+function Page() {
     const [pagenumber, setpagenumber] = useState(1)
   const router=useRouter()
   const [formData, setFormData] = useState({
@@ -16,10 +16,10 @@ function page() {
     email: ''
   })
   console.log(formData)
-  const [storedData, setStoredData] = useState({
-    username: '',
-    email: ''
-  })
+  // const [storedData, setStoredData] = useState({
+  //   username: '',
+  //   email: ''
+  // })
   
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ function page() {
     })
     console.log(res.data)
     if(res.status===201){
-    setStoredData(formData)
+    // setStoredData(formData)
     setpagenumber(pagenumber+1)
     router.push(`/user-dashboard/${formData.username}`)
 
@@ -85,7 +85,7 @@ function page() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full">Sign in</Button>
+          <Button type="submit" className="w-full">Login in</Button>
         </CardFooter>
       </Card>
     </form>
@@ -95,4 +95,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

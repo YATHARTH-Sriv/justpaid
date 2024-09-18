@@ -34,7 +34,7 @@ const chat = model.startChat({
     },
   ],
 });
-let result = await chat.sendMessage(message);
+const result = await chat.sendMessage(message);
 console.log(result.response.text());
 return NextResponse.json({ text: result.response.text() });
 }

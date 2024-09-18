@@ -7,7 +7,6 @@ import {
   CircleUser,
   CreditCard,
   DollarSign,
-  Menu,
   Package2,
   Search,
   Users,
@@ -22,7 +21,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Bar, BarChart, Pie, PieChart, XAxis,CartesianGrid, Sector } from 'recharts'
 import { useEffect, useState } from 'react'
 import { useParams } from "next/navigation"
@@ -78,13 +76,6 @@ export const description = "A donut chart with text"
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig
-const invoices = [
-  { id: "INV001", client: "Acme Corp", amount: 5000, status: "Paid" },
-  { id: "INV002", client: "Globex Inc", amount: 7500, status: "Pending" },
-  { id: "INV003", client: "Wayne Enterprises", amount: 12000, status: "Overdue" },
-  { id: "INV004", client: "Stark Industries", amount: 8500, status: "Paid" },
-  { id: "INV005", client: "Umbrella Corp", amount: 6000, status: "Pending" },
-]
 interface RevenueData {
   _id: string;
   amount: number;
@@ -120,7 +111,6 @@ interface ExpenseData{
 
 
 function Page() {
-  const { user } = useParams();
   const [revenuedata, setrevenuedata] = useState<RevenueData[]>([]);
   const [donationrevenue, setdonationrevenue] = useState(100);
   const [adsrevenue, setadsrevenue] = useState(200);
