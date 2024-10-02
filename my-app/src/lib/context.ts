@@ -39,7 +39,7 @@ export async function getMatchesFromEmbeddings(
 export async function getContext(query: string) {
   const queryEmbeddings = await getEmbeddings(query);
   const matches = await getMatchesFromEmbeddings(queryEmbeddings.data[0].embedding);
-  let qualifieddata:any= [];
+  const qualifieddata:any= [];
 
   // Use forEach or for loop instead of map
   matches.forEach((match) => {
