@@ -21,7 +21,7 @@ export async function POST(){
 //         // // const res=await getEmbeddings(textquery)
 //         // // const matches = await getMatchesFromEmbeddings(res.data[0].embedding);
 //         // // console.log("final res",matches)
-//         // const res=await axios.get("https://financialmodelingprep.com/api/v3/search?query=APPLE&limit=10&exchange=NASDAQ&apikey=vFZN2S28ohfHspWkaYejc6xIlOyrUMBZ")
+//         // const res=await axios.get("https://financialmodelingprep.com/api/v3/search?query=APPLE&limit=10&exchange=NASDAQ&apikey=")
 //         // // const matches=await getContext(textquery)
 //         // const data=res.data
 //         // // const refined=data.foreach((company:company)=>{
@@ -41,7 +41,7 @@ export async function POST(){
 //         // // });
 //         // console.log("refined",refined)
 //         // return NextResponse.json(refined[0],{status:200})
-//         const response=await axios.get(`https://financialmodelingprep.com/api/v3/search?query=APPLE&limit=10&exchange=NASDAQ&apikey=vFZN2S28ohfHspWkaYejc6xIlOyrUMBZ`)
+//         const response=await axios.get(`https://financialmodelingprep.com/api/v3/search?query=APPLE&limit=10&exchange=NASDAQ&apikey=`)
 //         // const data=response.data
 //         const refined=[]
 //         for (let i = 0; i < response.data.length; i++) {

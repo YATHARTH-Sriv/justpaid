@@ -56,7 +56,7 @@ export async function POST(req: Request) {
             }
     
             const res = await axios.get(
-              `https://financialmodelingprep.com/api/v3/income-statement/${refined[0].symbol}?period=annual&apikey=vFZN2S28ohfHspWkaYejc6xIlOyrUMBZ`
+              `https://financialmodelingprep.com/api/v3/income-statement/${refined[0].symbol}?period=annual&apikey=${process.env.FINANCIAL_DATA_API}`
             );
 
             console.log(`Fetched revenue info for ${company}:`, res.data[0]);
