@@ -3,6 +3,8 @@
 // import axios from "axios";
 // import { NextResponse } from "next/server";
 
+import { NextResponse } from "next/server";
+
 // interface company{
 //         symbol: string,
 //         name: string,
@@ -11,7 +13,9 @@
 //         exchangeShortName: string
 // }
 
-// export async function POST(){
+export async function POST(){
+    return NextResponse.json({message:"Hello World"})
+}
 //     try {
 //         // const textquery="what is my revenue details in month of august"
 //         // // const res=await getEmbeddings(textquery)
