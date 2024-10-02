@@ -30,13 +30,7 @@ function Page() {
     status: ''
   })
 
-//   const [cashFlow, setCashFlow] = useState({
-//     date: '',
-//     amount: '',
-//     type: '',
-//     category: '',
-//     description: ''
-//   })
+
 
   const [expenses, setExpenses] = useState({
     description:"",
@@ -55,7 +49,8 @@ function Page() {
         category: revenue.category,
         description: revenue.description,
         invoiceId: revenue.invoiceId,
-        currentmonth: new Date().toLocaleString('default', { month: 'long' })
+        // currentmonth: new Date().toLocaleString('default', { month: 'long' })
+        
     })
     if(res.status===201){
         console.log(res.data)
@@ -65,7 +60,6 @@ function Page() {
             description: "Add More Records If You Want",
           })
     }
-    // Here you would typically send the data to your backend
   }
 
   const handleInvoiceSubmit = async (e: React.FormEvent) => {
@@ -88,25 +82,6 @@ function Page() {
     // Here you would typically send the data to your backend
   }
 
-//   const handleCashFlowSubmit = async (e: React.FormEvent) => {
-//     e.preventDefault()
-//     console.log('Cash Flow submitted:', cashFlow)
-//     // Here you would typically send the data to your backend
-//     const res=await axios.post("/api/cash-flow",{
-//         date: cashFlow.date,
-//         amount: cashFlow.amount,
-//         type: cashFlow.type,
-//         category: cashFlow.category, 
-//         description: cashFlow.description, 
-//         })
-//         if(res.status===201){
-//             console.log(res.data)
-//             toast({
-//                 title: "Cash Flow Data Recorded",
-//                 description: "Add More Records If You Want",
-//             })
-//         }
-//   }
 
   const handleExpenseSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

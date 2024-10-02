@@ -1,14 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import axios from "axios";
 import { Skeleton } from "../ui/skeleton";
 import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart";
+import Chat from "../chat/page";
 
 interface RevenueData {
   _id: string;
@@ -90,37 +88,6 @@ const chartConfigbar = {
       .trim()
   }));
 
-  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([
-    { role: "user", content: "How good are you at turning every user coming on the app to a paid user?" },
-  ]);
-  const [inputMessage, setInputMessage] = useState("");
-  
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-  
-    if (inputMessage.trim() === "") return;
-  
-    try {
-      // Send the user's message to the AI Gemini API
-      const res = await axios.post("/api/ai-gemini", { message: inputMessage, sale, revenue, expenses });
-      const data = res.data;
-      const newtext = String(data.text)
-                  .replace(/\*\s*\*\*/g, '')  
-                  .replace(/\*\*/g, '');      
-
-  
-      // Store the user's message and the AI response in the chat history
-      const userMessage = { role: "user", content: inputMessage };
-      const aiMessage = { role: "ai", content: newtext }; // Assuming the AI response is in the `text` field
-  
-      setChatMessages((prevMessages) => [...prevMessages, userMessage, aiMessage]);
-      setInputMessage("");
-    } catch (error) {
-      console.error("Error fetching AI response:", error);
-    }
-  };
-  
-
   return (
     <>
     {loading ?
@@ -133,12 +100,11 @@ const chartConfigbar = {
           <Skeleton className="h-4 w-[200px]" />
         </div>
       </div>
-    </div>:
+      </div>:
       <div className="p-4 space-y-6 bg-gradient-to-br bg-black min-h-screen">
-  <h1 className="text-3xl font-bold mb-6 text-center text-white">AI Business Insights</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-white">AI Business Insights</h1>
 
-  {/* Grid for the cards */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
       <CardHeader>
         <CardTitle className="text-2xl text-primary">Positive Insights</CardTitle>
@@ -218,75 +184,11 @@ const chartConfigbar = {
         </div>
       </CardFooter>
     </Card>
-  </div>
-
-  {/* Full-width Chatbox */}
-  {/* <Card className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 mt-6">
-    <CardHeader>
-      <CardTitle className="text-2xl text-primary">Chat with AI Assistant</CardTitle>
-      <CardDescription>Get deeper insights about your business</CardDescription>
-    </CardHeader>
-    <CardContent>
-      <ScrollArea className="h-[400px] w-full pr-4 mb-4">
-        {chatMessages.map((message, index) => (
-          <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
-            <span className={`inline-block p-3 rounded-lg ${
-              message.role === "user" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"
-            }`}>
-              {message.content}
-            </span>
-          </div>
-        ))}
-      </ScrollArea>
-      <div className="flex mt-4">
-        <Input
-          type="text"
-          placeholder="Ask about your business..."
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-          className="flex-grow"
-        />
-        <Button onClick={handleSendMessage} className="ml-2">
-          Send
-        </Button>
       </div>
-    </CardContent>
-  </Card> */}
-  <Card className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 mt-6">
-  <CardHeader>
-    <CardTitle className="text-2xl text-primary">Chat with AI Assistant</CardTitle>
-    <CardDescription>Get deeper insights about your business</CardDescription>
-  </CardHeader>
-  <CardContent>
-    <ScrollArea className="h-[400px] w-full pr-4 mb-4">
-      {chatMessages.map((message, index) => (
-        <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
-          <span className={`inline-block p-3 rounded-lg ${
-            message.role === "user" ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"
-          }`}>
-            {message.content}
-          </span>
-        </div>
-      ))}
-    </ScrollArea>
-    <div className="flex mt-4">
-      <Input
-        type="text"
-        placeholder="Ask about your business..."
-        value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
-        onKeyPress={(e) => e.key === "Enter" && handleSendMessage(e)}
-        className="flex-grow"
-      />
-      <Button onClick={handleSendMessage} className="ml-2">
-        Send
-      </Button>
-    </div>
-  </CardContent>
-</Card>
-</div>
-}
+      <Chat/>
+
+      </div>
+    }
     </>
-  );
-}
+    );
+  }
