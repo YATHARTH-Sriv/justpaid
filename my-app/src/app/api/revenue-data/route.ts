@@ -11,8 +11,8 @@ export async function POST(req:NextRequest) {
         const userCookie = cookieStore.get('email');
         console.log(userCookie)
         const email=userCookie?.value.replaceAll('%40','@')
-        const {amount,date,source,category,description,invoiceID}=await req.json()
-        const currentmonth="July"
+        const {amount,date,source,category,description,invoiceID,currentmonth}=await req.json()
+        // const currentmonth="July"
         const revenue=await RevenueModel.create({
             amount: amount,
             date: date,

@@ -49,7 +49,7 @@ function Page() {
         category: revenue.category,
         description: revenue.description,
         invoiceId: revenue.invoiceId,
-        // currentmonth: new Date().toLocaleString('default', { month: 'long' })
+        currentmonth: new Date().toLocaleString('default', { month: 'long' })
         
     })
     if(res.status===201){
