@@ -10,7 +10,7 @@ export async function POST(){
     const userCookie = cookieStore.get('email');
     const cookievalue=userCookie?.value.replaceAll('%40','@')
     const revenuedata=await RevenueModel.find({useremail:cookievalue})
-   //  console.log("revenue data",revenuedata)
+    console.log("revenue data",revenuedata)
     return NextResponse.json(revenuedata,{status:200})
     // await RevenueModel.find({useremail:userCookie})
    } catch (error) {

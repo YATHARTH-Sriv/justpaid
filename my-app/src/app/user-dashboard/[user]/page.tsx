@@ -137,7 +137,7 @@ function Page() {
 
         // Iterate over the revenue data and accumulate the amounts
         res.data.forEach((data: RevenueData) => {
-          if (data.category === "Sale") {
+          if (data.category === "Sale" || data.category === "Sales" || data.category === "Product" || data.category === "Service" || data.category === "Subscription" || data.category === "Other" || data.category === "sales") {
             totalSale += data.amount;
           }
           if (data.category === "Income") {
