@@ -8,7 +8,7 @@ export async function getMatchesFromEmbeddings(
     const pineconeIndex = await client.index("justpaid");
     const namespace = pineconeIndex.namespace("revenue");
     const queryResult = await namespace.query({
-      topK:4,
+      topK:5,
       vector: embeddings,
       includeMetadata: true,
     });
@@ -43,7 +43,7 @@ export async function getContext(query: string) {
 
   // Use forEach or for loop instead of map
   matches.forEach((match) => {
-    if (match && match.score && match.score >= 0.82) {
+    if (match && match.score && match.score >= 0.7) {
       qualifieddata.push(match.metadata);
     }
   });

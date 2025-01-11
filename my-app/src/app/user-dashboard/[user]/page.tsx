@@ -241,10 +241,11 @@ function Page() {
                     <Activity className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+573</div>
+                    Coming Soon
+                    {/*<div className="text-2xl font-bold">+573</div>
                     <p className="text-xs text-muted-foreground">
                       +201 since last hour
-                    </p>
+                    </p>*/}
                   </CardContent>
                 </Card>
               </div>

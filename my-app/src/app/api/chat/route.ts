@@ -9,84 +9,97 @@ export const maxDuration = 30;
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
-  
+
   const result = await streamText({
-    model: openai('gpt-4-turbo'),
+    model: openai('gpt-4o-mini'),
     messages: convertToCoreMessages(messages),
     tools: {
-      // Server-side tool to fetch revenue information
+      // Tool to fetch user revenue information
       getuserrevenueinfo: {
-        description: "Get the revenue information of the user's business through this tool",
+        description: "Get the revenue information of the user's business without asking for the company name, as data is fetched directly from the database.",
         parameters: z.object({
-          query: z.string().describe("The query to get the revenue information")
+          query: z.string().describe("The query to get the user's business revenue information"),
         }),
         execute: async ({ query }: { query: string }) => {
           try {
             const matches = await getContext(query);
-            let revenuedata=""
-            matches.forEach((match: { CurrentMonth: any; amount: any; category: any; date: any; description: any; source: any }) => {
-              revenuedata += ` ${match.amount} ${match.description} `;
+            let revenueData = "";
+            matches.forEach((match: { amount: any; description: any }) => {
+              revenueData += `Amount: ${match.amount}, Description: ${match.description}\n`;
             });
-            return revenuedata;
+            return revenueData || "No revenue data found for the given query.";
           } catch (error) {
             console.error("Error fetching revenue information:", error);
-            return { error: "Unable to fetch revenue information" };
+            return { error: "Unable to fetch revenue information." };
           }
-        }
+        },
       },
-      
+
+      // Enhanced tool to fetch financial information about a company
       getcompanyrevenueInformation: {
-        description: 'Retrieve revenue information of the company as per the company name given by the user',
-        parameters: z.object({ company: z.string() }),
-        execute: async ({ company }: { company: string }) => {
+        description: 'Retrieve detailed financial information (revenue, expenses, profit, etc.) about a specific company based on its name.',
+        parameters: z.object({
+          company: z.string().describe('The name of the company'),
+          infoType: z
+            .string()
+            .optional()
+            .describe('The type of financial information to retrieve, e.g., revenue, expenses, profit'),
+        }),
+        execute: async ({ company, infoType }: { company: string; infoType?: string }) => {
           try {
-            // Fetch revenue info from the external API
-            const response=await axios.get(`https://financialmodelingprep.com/api/v3/search?query=${company}&limit=10&exchange=NASDAQ&apikey=${process.env.FINANCIAL_DATA_API}`)
-            // const data=response.data
-            console.log("response",response.data)
-            const refined=[]
-            // this if condition is required for some examples like Apple and other comapnies which have same names
-            if(response.data.length>1){
-            const companyname= company.charAt(0).toUpperCase() + company.slice(1).toLowerCase();
-            for (let i = 0; i < response.data.length; i++) {
-            if(response.data[i].name.includes(`${companyname} `) ){
-                console.log("company",response.data[i])
-                refined.push(response.data[i])
-            }
-            }
-    
-            const res = await axios.get(
-              `https://financialmodelingprep.com/api/v3/income-statement/${refined[0].symbol}?period=annual&apikey=${process.env.FINANCIAL_DATA_API}`
+            const searchResponse = await axios.get(
+              `https://financialmodelingprep.com/api/v3/search?query=${company}&limit=10&exchange=NASDAQ&apikey=${process.env.FINANCIAL_DATA_API}`
             );
 
-            console.log(`Fetched revenue info for ${company}:`, res.data[0]);
-            console.log("revenue",res.data[0].revenue)
-            return res.data[0].revenue;
-           }
-            const res = await axios.get(
-            `https://financialmodelingprep.com/api/v3/income-statement/${response.data[0].symbol}?period=annual&apikey=${process.env.FINANCIAL_DATA_API}`
-          );
+            if (!searchResponse.data.length) {
+              return `No data found for company: ${company}`;
+            }
 
-          console.log(`Fetched revenue info for ${company}:`, res.data[0]);
-          console.log("revenue",res.data[0].revenue)
-          return res.data[0].revenue;
+            const matchingCompany = searchResponse.data.find((c: { name: string }) =>
+              c.name.toLowerCase().includes(company.toLowerCase())
+            );
+
+            if (!matchingCompany) {
+              return `No exact match found for company: ${company}`;
+            }
+
+            const incomeResponse = await axios.get(
+              `https://financialmodelingprep.com/api/v3/income-statement/${matchingCompany.symbol}?period=annual&apikey=${process.env.FINANCIAL_DATA_API}`
+            );
+
+            if (!incomeResponse.data.length) {
+              return `No financial data available for company: ${company}`;
+            }
+
+            const financialData = incomeResponse.data[0];
+
+            switch (infoType?.toLowerCase()) {
+              case 'revenue':
+                return `The revenue for ${company} is $${financialData.revenue.toLocaleString()}.`;
+              case 'expenses':
+                return `The total expenses for ${company} are $${financialData.costAndExpenses.toLocaleString()}.`;
+              case 'profit':
+                return `The net profit for ${company} is $${financialData.netIncome.toLocaleString()}.`;
+              default:
+                return `For ${company}, revenue: $${financialData.revenue.toLocaleString()}, expenses: $${financialData.costAndExpenses.toLocaleString()}, profit: $${financialData.netIncome.toLocaleString()}.`;
+            }
           } catch (error) {
-            console.error(`Failed to fetch revenue info for ${company}:`, error);
-            return { error: `Unable to fetch revenue information for ${company}` };
+            console.error(`Error fetching financial info for ${company}:`, error);
+            return { error: `Unable to fetch financial information for ${company}` };
           }
-        }
+        },
       },
-      
+
+      // Tool to ask the user for the company name
       getcompanyname: {
-        description: 'Ask the user for the company name to get the revenue information.',
+        description: 'Ask the user for the company name to retrieve revenue information.',
         parameters: z.object({
-          companyname: z.string().describe('The name of the company')
-        })
-      }
+          companyname: z.string().describe('The name of the company'),
+        }),
+      },
     },
   });
-  
+
   // Stream the response
   return result.toDataStreamResponse();
-  
 }

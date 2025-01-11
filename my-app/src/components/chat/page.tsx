@@ -10,59 +10,61 @@ import { Message, useChat } from 'ai/react';
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, addToolResult } = useChat({
     maxSteps: 5,
-
     async onToolCall({ toolCall }) {
       if (toolCall.toolName === 'getcompanyname') {
-        const companyName = input; 
-        return companyName; 
+        const companyName = input;
+        return companyName;
       }
     },
   });
 
   return (
-    <div className="text-black">
-      <Card className="w-full shadow-lg hover:shadow-xl transition-shadow duration-300 mt-6">
-        <CardHeader>
-          <CardTitle className="text-2xl text-primary">Chat with AI Assistant</CardTitle>
-          <CardDescription>Get deeper insights about your business</CardDescription>
+    // <div className="flex justify-center items-center h-screen w-full bg-gradient-to-b from-gray-100 to-gray-200 text-gray-900">
+      <Card className="w-full  shadow-2xl hover:shadow-xl transition-shadow duration-300">
+        <CardHeader className="bg-primary text-white p-4 rounded-t-lg">
+          <CardTitle className="text-3xl">AI Business Assistant</CardTitle>
+          <CardDescription>Ask for revenue, expenses, profit, and more about your company!</CardDescription>
         </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[400px] w-full pr-4 mb-4">
+        <CardContent className="p-6">
+          <ScrollArea className="h-[400px] w-full mb-4 bg-white shadow-inner rounded-lg p-4">
             {messages?.map((m: Message) => (
-              <div key={m.id}>
-                <strong>{m.role}:</strong> {m.content}
+              <div key={m.id} className="mb-4">
+                <p>
+                  <strong className="text-blue-600">{m.role}:</strong> {m.content}
+                </p>
                 {m.toolInvocations?.map((toolInvocation: ToolInvocation) => {
                   const toolCallId = toolInvocation.toolCallId;
                   const addResult = (result: string) =>
                     addToolResult({ toolCallId, result });
 
                   return 'result' in toolInvocation ? (
-                    <div key={toolCallId}>
-                      Tool call {`${toolInvocation.toolName}: `} {toolInvocation.result}
+                    <div key={toolCallId} className="text-green-600">
+                      {`Tool ${toolInvocation.toolName}: ${toolInvocation.result}`}
                     </div>
                   ) : (
-                    <div key={toolCallId}>Calling {toolInvocation.toolName}...</div>
+                    <div key={toolCallId} className="text-orange-600">
+                      {`Calling ${toolInvocation.toolName}...`}
+                    </div>
                   );
                 })}
-                <br />
               </div>
             ))}
           </ScrollArea>
 
-          <form onSubmit={handleSubmit} className="flex mt-4">
+          <form onSubmit={handleSubmit} className="flex items-center">
             <Input
               type="text"
               placeholder="Ask about your business..."
               value={input}
               onChange={handleInputChange}
-              className="flex-grow"
+              className="flex-grow shadow-lg rounded-md"
             />
-            <Button type="submit" className="ml-2">
+            <Button type="submit" className="ml-2 bg-primary text-white hover:bg-primary-dark">
               Send
             </Button>
           </form>
         </CardContent>
       </Card>
-    </div>
+    // </div>
   );
 }
